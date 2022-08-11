@@ -39,7 +39,7 @@ export const UpComming = () => {
           sotilayapti. *** Gulistonda bir kilogramm guruch 2000-2500 so'mga
           yetgan, *** mahalliy paxta yog'ining bir litri 2800-3000 so'mdan
           sotilayapti.
-        </marquee>ssss
+        </marquee>
       </div>
     </>
   );
