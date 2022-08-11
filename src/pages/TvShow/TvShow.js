@@ -15,7 +15,8 @@ export const TvShow = () => {
 
   return (
     <>
-      <ul className="container tvshow-list">
+    <div>
+    <ul className="container tvshow-list">
         {dataApi.length &&
           dataApi.map((e) => (
             <li key={e.title} className="tvshow-item">
@@ -40,6 +41,7 @@ export const TvShow = () => {
         yetgan, *** mahalliy paxta yog'ining bir litri 2800-3000 so'mdan
         sotilayapti.
       </marquee>
+    </div>
     </>
   );
 };
