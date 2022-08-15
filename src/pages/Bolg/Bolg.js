@@ -1,12 +1,13 @@
 import "./bolg.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Blog = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=5a85e135dc7864482b9a3c9378e912b1`
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=f30892eccefc07deb28509f0da56ccc0`
     )
       .then((res) => res.json())
       .then((dataApi) => setData(dataApi.results));
@@ -17,7 +18,7 @@ export const Blog = () => {
         <ul className="container blog-list">
           {data.length &&
             data.map((e) => (
-              <li key={e.title} className="blog-item">
+              <Link to={`/bolglink/${e.id}`} key={e.title} className="blog-item">
                 <img
                   className="blog-img"
                   src={`https://image.tmdb.org/t/p/w500${e.backdrop_path}`}
@@ -25,20 +26,9 @@ export const Blog = () => {
                 />
                 <h3 className="blog-title">{e.title}</h3>
                 <time className="blog-time">{e.release_date}</time>
-              </li>
+              </Link>
             ))}
         </ul>
-        <marquee className="marquee-text" behavior="" direction="">
-          1 Rossiya rubli, RUB, Sotib olish(145.00), Sotish(190.00). MB(177.49)
-          *** 2 Yevro, EUR Sotib olish(10500.00), Sotish(11700.00), MB(11052.42)
-          ***3 AQSh dollari, USD Sotib olish(10900.00), Sotish(10960.00),
-          MB(10920.28) *** Mol go'shti 13 ming so'm, *** qo'y go'shti 14-15 ming
-          so'mga yetgan, *** xorijiy o'simlik yog'ining bir litri 5000 so'mdan
-          oshgan, *** Qozog'iston bug'doy unining bir kilogrammi 2000 so'mga
-          sotilayapti. *** Gulistonda bir kilogramm guruch 2000-2500 so'mga
-          yetgan, *** mahalliy paxta yog'ining bir litri 2800-3000 so'mdan
-          sotilayapti.
-        </marquee>
       </div>
     </>
   );
