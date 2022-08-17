@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@mui/material";
 import axios from "axios";
-import {Paginations} from "../../Pagination/Pagination"
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Paginations } from "../../Pagination/Pagination";
 
-export const UpComming = () => {
+export const Search = () => {
+  const { searchQuery } = useParams();
+  //   const [data, setData] = useState([]);
+  const [active, setActive] = useState(1);
   const [data, setData] = useState({
     isLoading: true,
     isError: false,
@@ -11,15 +15,13 @@ export const UpComming = () => {
     totalPage: 1,
   });
 
-  const [active, setActive] = useState(1);
-
-  // f30892eccefc07deb28509f0da56ccc0
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/tv/popular`, {
+      .get(`https://api.themoviedb.org/3/search/movie`, {
         params: {
           api_key: `f30892eccefc07deb28509f0da56ccc0`,
           page: active,
+          query: searchQuery,
         },
       })
       .then((dataAPI) =>
@@ -31,8 +33,8 @@ export const UpComming = () => {
             dataAPI.data.total_pages > 500 ? 500 : dataAPI.data.total_pages,
         })
       );
-  }, [active]);
-
+  }, [active, searchQuery]);
+  console.log(data);
 
   return (
     <>
@@ -51,11 +53,8 @@ export const UpComming = () => {
               </Link>
             ))}
         </ul>
-       <Paginations data={data} setActive={setActive}/>
+        <Paginations data={data} setActive={setActive} />
       </div>
     </>
   );
 };
-
-
-
